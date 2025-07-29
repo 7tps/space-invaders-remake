@@ -7,7 +7,7 @@ public class DetectCollisions : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        AudioManager.instance.playSFX("destroy");
+        SFXManager.instance.playSFX("destroy");
         Destroy(gameObject);
         Destroy(other.gameObject);
     }

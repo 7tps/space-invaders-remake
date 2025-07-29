@@ -2,21 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnController : MonoBehaviour
+public class TitleScreenSpawnController : MonoBehaviour
 {
-
+    
     public GameObject enemyPrefab;
     public Sprite[] enemySprites;
-
-    public UIController ui;
     
     [Header("Spawn Position Settings")]
     public float spawnXRange = 8f;
     public float spawnYPosition = 3f;
 
     [Header("Spawn Rate Settings")]
-    public float spawnStart = 2f;
-    public float spawnDelay = 3f;
+    public float spawnStart = 1f;
+    public float spawnDelay = 2f;
     
     
     // Start is called before the first frame update
@@ -39,11 +37,6 @@ public class SpawnController : MonoBehaviour
     public void SpawnEnemy()
     {
         
-        if (UIController.instance.pauseActive)
-        {
-            return;
-        }
-        
         Vector3 enemyPos = new Vector3(Random.Range(-spawnXRange, spawnXRange), spawnYPosition, 0);
         Sprite s = enemySprites[(int) Random.Range(0, enemySprites.Length)];
         
@@ -52,17 +45,6 @@ public class SpawnController : MonoBehaviour
         
     }
 
-    public void setDifficulty(string difficulty)
-    {
-        Debug.Log("Setting difficulty: " + difficulty + ".");
-        if (difficulty == "easy")
-        {
-            spawnDelay = 3f;
-        }
+   
 
-        if (difficulty == "hard")
-        {
-            spawnDelay =  0.75f;
-        }
-    }
 }

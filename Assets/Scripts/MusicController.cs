@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class MusicController : MonoBehaviour
 {
     
-    public static AudioManager instance;
+    public AudioSource source;
+    
+    public static MusicController instance;
 
     public float volume = 1f;
     
@@ -17,10 +19,8 @@ public class AudioManager : MonoBehaviour
         }
     }
     
-    public void updateVolume(float value)
+    public void updateVolume()
     {
-        volume = value;
-        MusicController.instance.updateVolume();
-        SFXManager.instance.updateVolume();
+        source.volume = volume * AudioManager.instance.volume;
     }
 }

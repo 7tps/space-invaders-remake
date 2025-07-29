@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveForward : MonoBehaviour
+public class TitleScreenMoveForward : MonoBehaviour
 {
 
     public bool enemy = false;
@@ -24,10 +24,6 @@ public class MoveForward : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (UIController.instance.pauseActive)
-        {
-            return;
-        }
         
         transform.Translate(moveSpeed * Time.deltaTime * Vector2.up);
     
@@ -37,7 +33,6 @@ public class MoveForward : MonoBehaviour
         }
         if (transform.position.y < lowerBound)
         {
-            Debug.Log("Game Over!");
             Destroy(gameObject);
         }
             

@@ -19,6 +19,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (UIController.instance.pauseActive)
+        {
+            return;
+        }
+        
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         transform.Translate(horizontalInput * moveSpeed * Time.deltaTime, 0, 0);
         if (transform.position.x > xBound)
@@ -32,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            AudioManager.instance.playSFX("shoot");
+            SFXManager.instance.playSFX("shoot");
             Instantiate(laser, transform.position, Quaternion.identity);
         }
         

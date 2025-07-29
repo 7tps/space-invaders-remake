@@ -2,32 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveForward : MonoBehaviour
+public class TitleScreenEnemy : MonoBehaviour
 {
-
-    public bool enemy = false;
     
     public float moveSpeed;
 
     public float upperBound = 7f; 
-    public float lowerBound = -7f; 
+    public float lowerBound = -7f;
+
+    public GameObject enemyLaserPrefab;
     
     // Start is called before the first frame update
     void Start()
     {
-        if (enemy)
-        {
-            moveSpeed = Random.Range(-1, -5);
-        }
+        moveSpeed = Random.Range(-3, -5);
+        
+        StartCoroutine(SpawnLasers());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (UIController.instance.pauseActive)
-        {
-            return;
-        }
         
         transform.Translate(moveSpeed * Time.deltaTime * Vector2.up);
     
@@ -37,9 +32,22 @@ public class MoveForward : MonoBehaviour
         }
         if (transform.position.y < lowerBound)
         {
-            Debug.Log("Game Over!");
             Destroy(gameObject);
         }
             
+    }
+    
+    private IEnumerator SpawnLasers()
+    {
+        while (true)
+        {
+            float waitTime = Random.Range(1f, 3f);
+            yield return new WaitForSeconds(waitTime);
+            
+            if (enemyLaserPrefab != null)
+            {
+                Instantiate(enemyLaserPrefab, transform.position, Quaternion.identity);
+            }
+        }
     }
 }
