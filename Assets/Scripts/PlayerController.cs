@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Space key pressed.");
+            AudioManager.instance.playSFX("shoot");
             Instantiate(laser, transform.position, Quaternion.identity);
         }
         

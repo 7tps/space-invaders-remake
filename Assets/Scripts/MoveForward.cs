@@ -5,6 +5,8 @@ using UnityEngine;
 public class MoveForward : MonoBehaviour
 {
 
+    public bool enemy = false;
+    
     public float moveSpeed;
 
     public float upperBound = 7f; 
@@ -13,7 +15,10 @@ public class MoveForward : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (enemy)
+        {
+            moveSpeed = Random.Range(-1, -5);
+        }
     }
 
     // Update is called once per frame
