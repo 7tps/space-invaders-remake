@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("Space key pressed.");
             Instantiate(laser, transform.position, Quaternion.identity);
         }
         
