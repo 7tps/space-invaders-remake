@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class SpawnController : MonoBehaviour
 {
@@ -18,10 +21,27 @@ public class SpawnController : MonoBehaviour
     public float spawnStart = 2f;
     public float spawnDelay = 3f;
     
+    [Header("Difficulty Buttons")]
+    public Button easyButton;
+    public Button hardButton;
+
+    [Header("Button Colors")] 
+    public ColorBlock active;
+    public ColorBlock inactive;
     
     // Start is called before the first frame update
     void Start()
     {
+        active = easyButton.colors;
+        active.normalColor = new Color32(160, 160, 160, 255);
+        active.highlightedColor = new Color32(100, 100, 100, 255);
+        easyButton.colors = active;
+        
+        inactive = hardButton.colors;
+        inactive.normalColor = Color.white;
+        inactive.highlightedColor = new Color32(180, 180, 180, 255);
+        hardButton.colors = inactive;
+        
         StartCoroutine(SpawnEnemyCoroutine());
     }
 
@@ -58,11 +78,17 @@ public class SpawnController : MonoBehaviour
         if (difficulty == "easy")
         {
             spawnDelay = 3f;
+            easyButton.colors = active;
+            hardButton.colors = inactive;
         }
 
         if (difficulty == "hard")
         {
             spawnDelay =  0.75f;
+            easyButton.colors = inactive;
+            hardButton.colors = active;
         }
+        
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }
