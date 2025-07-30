@@ -10,15 +10,19 @@ public class SFXManager : MonoBehaviour
     public AudioClip destroySFX;
 
     public static SFXManager instance;
-
-    public float volume = 1f;
     
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+    }
+
+    void Start()
+    {
+        updateVolume();
     }
 
     public void playSFX(string sfx)
@@ -35,6 +39,6 @@ public class SFXManager : MonoBehaviour
 
     public void updateVolume()
     {
-        source.volume = volume * AudioManager.instance.volume;
+        source.volume = AudioManager.instance.getSFXVolume();
     }
 }

@@ -12,6 +12,10 @@ public class TitleScreenEnemy : MonoBehaviour
 
     public GameObject enemyLaserPrefab;
     
+    [Header("Audio")]
+    public AudioClip shootSound;
+    public AudioSource audioSource;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +45,12 @@ public class TitleScreenEnemy : MonoBehaviour
     {
         while (true)
         {
+            
+            if (transform.position.y < -5)
+            {
+                break;
+            }
+            
             float waitTime = Random.Range(1f, 3f);
             yield return new WaitForSeconds(waitTime);
             

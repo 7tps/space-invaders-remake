@@ -6,21 +6,14 @@ public class MusicController : MonoBehaviour
 {
     
     public AudioSource source;
-    
-    public static MusicController instance;
 
-    public float volume = 1f;
-    
-    void Awake()
+    void Start()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
+        updateVolume();
     }
     
     public void updateVolume()
     {
-        source.volume = volume * AudioManager.instance.volume;
+        source.volume = AudioManager.instance.musicVolume * AudioManager.instance.volume;
     }
 }

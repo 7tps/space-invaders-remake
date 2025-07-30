@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-
+    
+    public static UIController instance;
+    
     public bool pauseActive = false;
     
     public GameObject pauseMenu;
@@ -15,7 +18,10 @@ public class UIController : MonoBehaviour
     public Slider musicSlider;
     public Slider SFXSlider;
     
-    public static UIController instance;
+    public MusicController music;
+    public SFXManager sfx;
+
+    public string titleScene;
     
     void Awake()
     {
@@ -55,15 +61,15 @@ public class UIController : MonoBehaviour
     public void updateMusicVolume(float value)
     {
         value = musicSlider.value;
-        MusicController.instance.volume = value;
-        MusicController.instance.updateVolume();
+        AudioManager.instance.musicVolume = value;
+        music.updateVolume();
     }
     
     public void updateSFXVolume(float value)
     {
         value = SFXSlider.value;
-        SFXManager.instance.volume = value;
-        SFXManager.instance.updateVolume();
+        AudioManager.instance.sfxVolume = value;
+        sfx.updateVolume();
     }
     
     public void showSettings()
@@ -90,6 +96,6 @@ public class UIController : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         pauseActive = false;
-        //go to title screen
+        SceneManager.LoadScene(titleScene);
     }
 }
