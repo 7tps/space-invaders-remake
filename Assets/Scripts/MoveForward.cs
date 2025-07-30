@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MoveForward : MonoBehaviour
 {
@@ -11,7 +12,9 @@ public class MoveForward : MonoBehaviour
 
     public float upperBound = 7f; 
     public float lowerBound = -7f; 
-    
+
+    public string gameOverScene = "Game Over Screen";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,8 +40,8 @@ public class MoveForward : MonoBehaviour
         }
         if (transform.position.y < lowerBound)
         {
-            Debug.Log("Game Over!");
             Destroy(gameObject);
+            SceneManager.LoadScene(gameOverScene);
         }
             
     }
