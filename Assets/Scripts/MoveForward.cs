@@ -13,8 +13,6 @@ public class MoveForward : MonoBehaviour
     public float upperBound = 7f; 
     public float lowerBound = -7f; 
 
-    public string gameOverScene = "Game Over Screen";
-
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +39,7 @@ public class MoveForward : MonoBehaviour
         if (transform.position.y < lowerBound)
         {
             Destroy(gameObject);
-            SceneManager.LoadScene(gameOverScene);
+            LifeManager.instance.loseLife();
         }
             
     }
